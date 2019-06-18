@@ -33,15 +33,15 @@
                 Entrar
             </button>
         </div>
-        {{users}}
     </div>
 </template>
 
 <script>
     import {httpUsers} from '../service/config.js'
+    import {store} from '../store'
 
     export default {
-        name: 'home',
+        name: 'login',
         data() {
             return {
                 email: '',
@@ -61,13 +61,12 @@
                     }
                 }).then(response => {
                     if (response.data.length > 0) {
-                        this.users = response.data
-                        alert('achou')
-                        return
+                        this.users = response.data[0]
+                        store.dispatch('set', this.users)
+                        this.$router.push('/reservation')
                     }
-                    alert('não achou')
                 }).catch(() => {
-                    alert('não achou')
+                    alert('Usuário não encontrado')
                 })
             }
         }
