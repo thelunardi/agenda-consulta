@@ -3,7 +3,15 @@
     <div class="home">
       <div class="item item-1 background-black"></div>
       <div class="item item-2 background-black">Sistema de Agendamento de Consultas</div>
-      <div class="item item-3 background-black">Logout</div>
+      <div class="item item-3 background-black">
+        <button
+          class="btn-flat waves-effect waves-teal"
+          v-if="logado"
+          @click="logout()"
+          type="submit">
+          Logout
+        </button>
+      </div>
       <div class="item item-4"></div>
       <div class="item item-5">
         <router-view/>
@@ -16,6 +24,23 @@
   </div>
 </template>
 
+<script>
+import {store} from '../src/store'
+export default {
+  computed: {
+    logado () {
+      return store.getters.authenticated
+    }
+  },
+  methods: {
+    logout () {
+      store.dispatch('remove', this.users)
+      this.$router.push('/')
+    }
+  }
+}
+</script>
+
 <style>
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -24,20 +49,24 @@
     text-align: center;
     color: #2c3e50;
   }
-  *{
+
+  * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
   }
+
   .home {
     display: grid;
     background-color: rgba(0, 0, 0, 0.0);
     grid-template-columns: auto 80% auto;
     grid-template-rows: auto minmax(100vh, auto) auto;
   }
+
   .item {
     background-color: white;
   }
+
   .background-black {
     background-color: royalblue;
     color: white;

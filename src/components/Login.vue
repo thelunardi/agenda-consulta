@@ -28,6 +28,7 @@
 
     <div>
       <button
+        class="btn waves-effect"
         @click="logar()"
         type="submit">
         Entrar
