@@ -1,31 +1,32 @@
 <template>
   <div class="reservation">
     <div class="row">
-      <label for="date">Data*</label>
+      <label for="day">Data*</label>
 
       <div>
         <input
-          id="date"
+          id="day"
           type="date"
-          name="date"
+          name="day"
+          v-model="day"
         >
       </div>
     </div>
 
     <div class="row">
-      <label for="shift">Período*</label>
-
-      <select
-        id="shift"
-        name="shift"
+      <label for="period">Período*</label>
+      <input
+        id="period"
+        type="text"
+        name="period"
+        v-model="period"
       >
-        <option value="1">Manhã</option>
-        <option value="2">Tarde</option>
-      </select>
     </div>
 
     <div>
       <button
+        class="btn waves-effect"
+        @click="salvar()"
         type="submit">
         Salvar
       </button>
@@ -34,11 +35,30 @@
 </template>
 
 <script>
+import {httpReservation} from '../service/config.js'
+
 export default {
   name: 'reservation',
   data () {
-    return {}
+    return {
+      day: '',
+      period: ''
+    }
   },
-  methods: {}
+  methods: {
+    salvar () {
+      if (this.day === '' || this.period === '') {
+        return
+      }
+      httpReservation.post('db', {
+        day: this.day,
+        period: this.period
+      }).then(() => {
+        alert('Horário reservado com sucesso')
+      }).catch(() => {
+        alert('Erro ao reservar horário')
+      })
+    }
+  }
 }
 </script>
