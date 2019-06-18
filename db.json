@@ -1,9 +1,5 @@
 {
-  "reservations": [
-    {
-      "id": 1,
-      "day": "2019-06-06",
-      "period": "manha"
-    }
-  ]
+  "id": 1,
+  "day": "2019-06-06",
+  "period": "manha"
 }
