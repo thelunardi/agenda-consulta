@@ -14,7 +14,7 @@
     </div>
 
     <div class="row">
-      <label id="texto-titulo" for="phone" class="col-lg-4 col-form-label">Telefone*</label>
+      <label for="phone" class="col-lg-4 col-form-label">Telefone*</label>
 
       <div>
         <input
