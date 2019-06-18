@@ -1,9 +1,9 @@
 import axios from 'axios'
 
 export const httpUsers = axios.create({
-    baseURL: 'https://jsonplaceholder.typicode.com'
+  baseURL: process.env.API_USER
 })
 
 export const httpReservation = axios.create({
-    baseURL: 'https://my-json-server.typicode.com/alunardi/agenda-consulta/reservation'
+  baseURL: process.env.API_RESERVATION
 })

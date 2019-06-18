@@ -17,30 +17,30 @@
 </template>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-*{
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-.home {
-  display: grid;
-  background-color: rgba(0, 0, 0, 0.0);
-  grid-template-columns: auto 80% auto;
-  grid-template-rows: auto minmax(100vh, auto) auto;
-}
-.item {
-  background-color: white;
-}
-.background-black {
-  background-color: royalblue;
-  color: white;
-  padding: 10px;
-}
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+  }
+  *{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+  .home {
+    display: grid;
+    background-color: rgba(0, 0, 0, 0.0);
+    grid-template-columns: auto 80% auto;
+    grid-template-rows: auto minmax(100vh, auto) auto;
+  }
+  .item {
+    background-color: white;
+  }
+  .background-black {
+    background-color: royalblue;
+    color: white;
+    padding: 10px;
+  }
 </style>
