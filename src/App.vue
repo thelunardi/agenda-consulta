@@ -59,8 +59,8 @@ export default {
   .home {
     display: grid;
     background-color: rgba(0, 0, 0, 0.0);
-    grid-template-columns: auto 80% auto;
-    grid-template-rows: auto minmax(100vh, auto) auto;
+    grid-template-columns: 10% 80% 10%;
+    grid-template-rows: 10% minmax(90vh, auto) auto;
   }
 
   .item {
