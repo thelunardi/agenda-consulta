@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../views/Home.vue'
-import Reservation from '../components/Reservation'
+import Reservation from '../components/reservation/Reservation'
 import {store} from '../store'
 
 Vue.use(Router)

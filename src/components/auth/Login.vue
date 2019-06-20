@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import {httpUsers} from '../service/config.js'
-import {store} from '../store'
+import {httpUsers} from '../../service/config.js'
+import {store} from '../../store'
 
 export default {
   name: 'login',
@@ -54,6 +54,9 @@ export default {
     }
   },
   methods: {
+    /**
+     *
+     */
     logar () {
       if (this.email === '' || this.phone === '') {
         return
@@ -76,7 +79,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
   .login {
     width: 50%;
     margin-top: 50px;

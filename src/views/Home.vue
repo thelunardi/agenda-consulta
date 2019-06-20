@@ -6,7 +6,7 @@
 
 <script>
 // @ is an alias to /src
-import Login from '@/components/Login'
+import Login from '@/components/auth/Login'
 
 export default {
   name: 'home',
