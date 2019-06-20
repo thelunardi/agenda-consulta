@@ -7,5 +7,5 @@ module.exports = merge(prodEnv, {
   API_USER: '"https://jsonplaceholder.typicode.com"',
   API_RESERVATION: '"https://my-json-server.typicode.com/alunardi/agenda-consulta"',
   API_HOLIDAYS: '"https://api.calendario.com.br"',
-  TOKEN_CALENDAR: '"YWxleGFuZHJlLmx1bmFyZGkyQGdtYWlsLmNvbSZoYXNoPTQ5NjU3MDM0"'
+  TOKEN_CALENDAR: '"YWxleGFuZHJlLmx1bmFyZGkyQGdtYWlsLmNvbSZoYXNoPTQ5NjU3MDM0"',
 })

@@ -7,7 +7,7 @@
         </div>
         <button
           class="btn btn-secondary btn-sm"
-          v-if="logado"
+          v-if="loggedIn"
           @click="logout()"
           type="submit">
           Logout
@@ -24,11 +24,10 @@
 </template>
 
 <script>
-import {store} from '../src/store'
 export default {
   computed: {
-    logado () {
-      return store.getters.authenticated
+    loggedIn () {
+      return this.$store.getters.authenticated
     }
   },
   methods: {
@@ -36,7 +35,7 @@ export default {
      *
      */
     logout () {
-      store.dispatch('remove', this.users)
+      this.$store.dispatch('removeUser', this.users)
       this.$router.push('/')
     }
   }

@@ -1,3 +1,18 @@
+.reservation {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center
+}
+
+.loader {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center
+}
+
 .days-reservation ul{
   list-style: none;
   margin: 0;

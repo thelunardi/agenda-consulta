@@ -1,9 +1,7 @@
 <template>
-  <div class="login">
+  <div class="card login">
     <div class="form-group">
-
-    <label for="email">E-mail*</label>
-
+      <label for="email">E-mail*</label>
       <div>
         <input
           class="form-control"
@@ -13,36 +11,36 @@
           v-model="email"
         >
       </div>
-    </div>
-
-    <div class="form-group">
-      <label for="phone">Telefone*</label>
-
-      <div>
+      <br>
+      <label for="phone">Phone*</label>
+      <div class="input-group mb-3">
         <input
           class="form-control"
+          :type="type"
           id="phone"
           name="phone"
-          type="password"
           v-model="phone"
         >
+        <div class="input-group-append">
+          <button @click="showPhone" class="btn btn-outline-secondary" type="button">
+            <i class="fa fa-eye"></i>
+          </button>
+        </div>
       </div>
-    </div>
-
-    <div>
-      <button
-        class="btn waves-effect"
-        @click="logar()"
-        type="submit">
-        Entrar
-      </button>
+      <div>
+        <button
+          class="btn waves-effect"
+          @click="logar()"
+          type="submit">
+          Entrar
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import {httpUsers} from '../../service/config.js'
-import {store} from '../../store'
 
 export default {
   name: 'login',
@@ -50,7 +48,8 @@ export default {
     return {
       email: '',
       phone: '',
-      users: []
+      users: [],
+      type: 'password'
     }
   },
   methods: {
@@ -69,12 +68,19 @@ export default {
       }).then(response => {
         if (response.data.length > 0) {
           this.users = response.data[0]
-          store.dispatch('set', this.users)
+          this.$store.dispatch('setUser', this.users)
           this.$router.push('/reservation')
         }
-      }).catch(() => {
-        alert('Usuário não encontrado')
+      }).catch((error) => {
+        alert('Usuário não encontrado', error)
       })
+    },
+    showPhone () {
+      if (this.type === 'password') {
+        this.type = 'text'
+        return
+      }
+      this.type = 'password'
     }
   }
 }
@@ -85,5 +91,11 @@ export default {
     margin-top: 50px;
     margin-left: 25%;
     margin-right: 25%;
+    padding: 20px;
+  }
+
+  .fa-eye {
+    background-color: #333 !important;
+    color: black !important;
   }
 </style>

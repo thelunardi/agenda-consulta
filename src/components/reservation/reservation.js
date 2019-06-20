@@ -1,4 +1,5 @@
 import {httpReservation, httpHolidays} from '../../service/config.js'
+import {DoubleBounce} from 'vue-loading-spinner'
 
 let moment = require('moment/moment')
 const LIMIT_DAYS = 10
@@ -8,8 +9,12 @@ const WEEK_DAYS = {sunday: 0, monday: 1, tuesday: 2, wednesday: 3, thursday: 4, 
 
 export default {
   name: 'reservation',
+  components: {
+    DoubleBounce
+  },
   data () {
     return {
+      loading: false,
       day: '',
       period: '',
       holidays: {},
@@ -32,7 +37,9 @@ export default {
     }
   },
   created () {
-    this.getNationalHolidays()
+    setTimeout(() => {
+      this.getNationalHolidays()
+    }, 1000)
   },
   methods: {
     getNationalHolidays () {
@@ -68,6 +75,7 @@ export default {
         }
         this.addDate(days, nowChange, 1)
       }
+      this.loading = true
     },
     /**
      *

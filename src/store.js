@@ -3,38 +3,32 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-const moduleA = {
+export const store = new Vuex.Store({
   state: {
     user: {},
     authenticated: false
   },
   mutations: {
-    setUser (state, user) {
+    setUserAuthenticate (state, user) {
       state.user = user
       state.authenticated = true
     },
-    removeUser (state) {
+    removeUserAuthenticate (state) {
       state.user = {}
       state.authenticated = false
     }
   },
   actions: {
-    set (state, user) {
-      store.commit('setUser', user)
+    setUser (state, user) {
+      store.commit('setUserAuthenticate', user)
     },
-    remove () {
-      store.commit('removeUser')
+    removeUser () {
+      store.commit('removeUserAuthenticate')
     }
   },
   getters: {
     authenticated (state) {
       return state.authenticated
     }
-  }
-}
-
-export const store = new Vuex.Store({
-  modules: {
-    auth: moduleA
   }
 })
