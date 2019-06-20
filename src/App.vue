@@ -5,7 +5,7 @@
       <div class="item item-2 background-black">Sistema de Agendamento de Consultas</div>
       <div class="item item-3 background-black">
         <button
-          class="btn-flat waves-effect waves-teal"
+          class="btn waves-effect"
           v-if="logado"
           @click="logout()"
           type="submit">
@@ -52,15 +52,14 @@ export default {
 
   * {
     box-sizing: border-box;
-    padding: 0;
     margin: 0;
   }
 
   .home {
     display: grid;
     background-color: rgba(0, 0, 0, 0.0);
-    grid-template-columns: 10% 80% 10%;
-    grid-template-rows: 10% minmax(90vh, auto) auto;
+    grid-template-columns: 20% 60% 20%;
+    grid-template-rows: 15vh minmax(75vh, auto) auto;
   }
 
   .item {

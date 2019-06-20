@@ -1,10 +1,12 @@
 <template>
   <div class="login">
-    <div class="row">
-      <label for="email">E-mail*</label>
+    <div class="form-group">
+
+    <label for="email">E-mail*</label>
 
       <div>
         <input
+          class="form-control"
           id="email"
           type="email"
           name="email"
@@ -13,11 +15,12 @@
       </div>
     </div>
 
-    <div class="row">
-      <label for="phone" class="col-lg-4 col-form-label">Telefone*</label>
+    <div class="form-group">
+      <label for="phone">Telefone*</label>
 
       <div>
         <input
+          class="form-control"
           id="phone"
           name="phone"
           type="password"
