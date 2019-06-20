@@ -2,6 +2,7 @@
   <div class="reservation">
     <div class="form-check">
       <b>Selecione uma Data:</b><br>
+      <div style="display: none">{{dates}}</div>
       <ul class="days-reservation">
         <li v-if="dates.length > 0"
             v-for="(date, index) in dates"

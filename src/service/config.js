@@ -7,3 +7,7 @@ export const httpUsers = axios.create({
 export const httpReservation = axios.create({
   baseURL: process.env.API_RESERVATION
 })
+
+export const httpHolidays = axios.create({
+  baseURL: process.env.API_HOLIDAYS
+})

@@ -1,4 +1,4 @@
-import {httpReservation} from '../../service/config.js'
+import {httpReservation, httpHolidays} from '../../service/config.js'
 
 let moment = require('moment/moment')
 const LIMIT_DAYS = 10
@@ -12,6 +12,7 @@ export default {
     return {
       day: '',
       period: '',
+      holidays: {},
       periodOptions: [
         {
           value: 'manha',
@@ -22,18 +23,32 @@ export default {
           label: 'Tarde'
         }
       ],
-      dates: []
+      year: moment().format('YYYY'),
+      dates: [],
+      params: {
+        token: process.env.TOKEN_CALENDAR,
+        json: true
+      }
     }
   },
   created () {
-    this.showAvailableDates()
+    this.getNationalHolidays()
   },
   methods: {
+    getNationalHolidays () {
+      httpHolidays.get(`/?ano=${this.year}`, {
+        params: this.params
+      }).then(response => {
+        this.holidays = response.data
+        this.showAvailableDates()
+      }).catch(() => {
+        console.log('Erro ao listar os feriados nacionais.')
+      })
+    },
     showAvailableDates () {
       moment.locale('pt')
       let now = moment()
       let nowChange = moment()
-      // verificar os feriados
       for (let days = 0; days < LIMIT_DAYS; days++) {
         if (this.mondayToThursday(now) && days === 0) {
           let dateToCompare = moment(`"${now.format('L')} ${TIME_WEEK}"`, 'DD/MM/YYYY HH:mm')
@@ -54,6 +69,9 @@ export default {
         this.addDate(days, nowChange, 1)
       }
     },
+    /**
+     *
+     */
     saveReservation () {
       if (this.day === '' || this.period === '') {
         return
@@ -73,14 +91,14 @@ export default {
      * @returns {boolean}
      */
     mondayToThursday (now) {
-      return (now.days() === 1 || now.days() === 2 || now.days() === 3 || now.days() === 4)
+      return (now.days() === WEEK_DAYS.monday || now.days() === WEEK_DAYS.tuesday || now.days() === WEEK_DAYS.wednesday || now.days() === WEEK_DAYS.thursday)
     },
     /**
      * @param now
      * @returns {boolean}
      */
     fridayToSunday (now) {
-      return (now.days() === 0 || now.days() === 5 || now.days() === 6)
+      return (now.days() === WEEK_DAYS.sunday || now.days() === WEEK_DAYS.friday || now.days() === WEEK_DAYS.saturday)
     },
     /**
      * @param now
@@ -119,13 +137,30 @@ export default {
       return false
     },
     /**
+     * @param now
+     * @returns {boolean}
+     */
+    searchDateHoliday (now) {
+      let date = now.format('L')
+      let result = false
+      this.holidays.forEach((holiday) => {
+        if (holiday.date === date) {
+          result = true
+        }
+      })
+      return result
+    },
+    /**
      * @param days
      * @param nowChange
      * @param daysToAdd
      */
     addDate (days, nowChange, daysToAdd) {
+      while (this.searchDateHoliday(nowChange.add(daysToAdd, 'days'))) {
+        nowChange.add(0, 'days')
+      }
       this.dates[days] = {
-        value: nowChange.add(daysToAdd, 'days').format('L'),
+        value: nowChange.format('L'),
         label: nowChange.format('dddd, D MMMM YYYY')
       }
     }

@@ -14,7 +14,9 @@
         </button>
       </div>
       <div class="item item-2">
-        <router-view/>
+        <transition name="fade">
+          <router-view/>
+        </transition>
       </div>
       <div class="item item-3 background-black"></div>
     </div>
