@@ -5,7 +5,7 @@
     </div>
     <div v-if="loading">
       <div class="form-check">
-        <b>Selecione uma Data:</b><br>
+        <b>Selecione uma Data*:</b><br>
         <ul class="days-reservation">
           <li v-if="dates.length > 0"
               v-for="(date, index) in dates"
