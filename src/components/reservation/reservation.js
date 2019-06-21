@@ -50,6 +50,9 @@ export default {
     }, 1000)
   },
   methods: {
+    /**
+     *
+     */
     getNationalHolidays () {
       httpHolidays.get(`/?ano=${this.year}`, {
         params: this.params
@@ -60,6 +63,9 @@ export default {
         console.log('Erro ao listar os feriados nacionais.')
       })
     },
+    /**
+     *
+     */
     showAvailableDates () {
       moment.locale('pt')
       let now = moment()
@@ -98,13 +104,21 @@ export default {
         this.$refs.period.focus()
         return
       }
-      httpReservation.post('reservation', {
+      let reservation = {
         id: 1,
         day: this.day,
         period: this.period
-      }).then(() => {
+      }
+      httpReservation.post('reservation', reservation).then(() => {
+        if (window.localStorage) {
+          localStorage.removeItem('reservation')
+        }
         this.confirm = true
       }).catch(() => {
+        if (window.localStorage) {
+          let reservationParsed = JSON.stringify(reservation)
+          localStorage.setItem('reservation', reservationParsed)
+        }
         this.confirm = true
       })
     },
