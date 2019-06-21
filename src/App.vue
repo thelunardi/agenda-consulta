@@ -10,7 +10,7 @@
           v-if="loggedIn"
           @click="logout()"
           type="submit">
-          Logout
+          Sair
         </button>
       </div>
       <div class="item item-2">

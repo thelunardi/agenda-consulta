@@ -14,7 +14,10 @@ export default {
   },
   data () {
     return {
+      confirm: false,
       loading: false,
+      showErrorDate: false,
+      showErrorPeriod: false,
       day: '',
       period: '',
       holidays: {},
@@ -34,6 +37,11 @@ export default {
         token: process.env.TOKEN_CALENDAR,
         json: true
       }
+    }
+  },
+  computed: {
+    fieldsEmpty () {
+      return !(this.day !== '' && this.period !== '')
     }
   },
   created () {
@@ -82,11 +90,11 @@ export default {
      */
     saveReservation () {
       if (this.day === '') {
-        alert('Selecione uma data.')
+        this.showErrorDate = true
         return
       }
       if (this.period === '') {
-        alert('Selecione um período.')
+        this.showErrorPeriod = true
         this.$refs.period.focus()
         return
       }
@@ -95,9 +103,9 @@ export default {
         day: this.day,
         period: this.period
       }).then(() => {
-        alert('Horário reservado com sucesso')
+        this.confirm = true
       }).catch(() => {
-        alert('Erro ao reservar horário')
+        this.confirm = true
       })
     },
     /**
@@ -177,6 +185,19 @@ export default {
         value: nowChange.format('L'),
         label: nowChange.format('dddd, D MMMM YYYY')
       }
+    },
+    /**
+     *
+     */
+    closeAlert () {
+      this.showErrorDate = false
+      this.showErrorPeriod = false
+    },
+    /**
+     *
+     */
+    closeSuccess () {
+      this.confirm = false
     }
   }
 }

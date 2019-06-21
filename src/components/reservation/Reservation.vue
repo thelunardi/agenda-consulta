@@ -4,6 +4,24 @@
       <double-bounce background="royalblue"></double-bounce>
     </div>
     <div v-if="loading">
+      <div v-if="showErrorDate" class="alert alert-danger alert-dismissible fade show" role="alert">
+        Selecione uma data abaixo.
+        <button @click="closeAlert" type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div v-if="showErrorPeriod" class="alert alert-danger alert-dismissible fade show" role="alert">
+        Selecione um período abaixo.
+        <button @click="closeAlert" type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div v-if="confirm" class="alert alert-success alert-dismissible fade show" role="alert">
+        Horário reservado com sucesso!
+        <button @click="closeSuccess" type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
       <div class="form-check">
         <b>Selecione uma Data*:</b><br>
         <ul class="days-reservation">
@@ -30,7 +48,12 @@
       </div>
       <br>
       <div class="form-check">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalConfirmation">
+        <button
+          :disabled="fieldsEmpty"
+          type="button"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#modalConfirmation">
           Confirmar
         </button>
         <div class="modal fade" id="modalConfirmation" tabindex="-1" role="dialog" aria-hidden="true">

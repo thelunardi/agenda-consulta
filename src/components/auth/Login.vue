@@ -1,7 +1,13 @@
 <template>
   <div class="card login">
     <div class="form-group">
-      <label for="email">E-mail*</label>
+      <div v-if="showError" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Usuário não encontrado!</strong> Verifique seu e-mail e seu telefone.
+        <button @click="closeAlert" type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <b><label for="email">E-mail*</label></b>
       <div>
         <input
           class="form-control"
@@ -13,21 +19,16 @@
         >
       </div>
       <br>
-      <label for="phone">Phone*</label>
+      <b><label for="phone">Telefone*</label></b>
       <div class="input-group mb-3">
         <input
           class="form-control"
-          :type="type"
+          type="text"
           id="phone"
           name="phone"
           ref="phone"
           v-model="phone"
         >
-        <div class="input-group-append">
-          <button @click="showPhone" class="btn btn-outline-secondary" type="button">
-            <i class="fa fa-eye"></i>
-          </button>
-        </div>
       </div>
       <div>
         <button
@@ -48,6 +49,7 @@ export default {
   name: 'login',
   data () {
     return {
+      showError: false,
       email: '',
       phone: '',
       users: [],
@@ -77,17 +79,20 @@ export default {
           this.users = response.data[0]
           this.$store.dispatch('setUser', this.users)
           this.$router.push('/reservation')
+          return
         }
-      }).catch((error) => {
-        alert('Usuário não encontrado', error)
+        if (response.data.length === 0) {
+          this.showError = true
+        }
+      }).catch(() => {
+        this.showError = true
       })
     },
-    showPhone () {
-      if (this.type === 'password') {
-        this.type = 'text'
-        return
-      }
-      this.type = 'password'
+    /**
+     *
+     */
+    closeAlert () {
+      this.showError = false
     }
   }
 }
