@@ -23,19 +23,45 @@
       <br>
       <div class="form-check">
         <b><label for="period">Período*</label></b>
-        <select class="form-control period" id="period" v-model="period">
+        <select class="form-control period" ref="period" id="period" v-model="period">
           <option value="manha">Manhã</option>
           <option value="tarde">Tarde</option>
         </select>
       </div>
       <br>
       <div class="form-check">
-        <button
-          class="btn waves-effect"
-          @click="saveReservation()"
-          type="submit">
-          Salvar
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalConfirmation">
+          Confirmar
         </button>
+        <div class="modal fade" id="modalConfirmation" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Você confirma sua reserva para o dia {{day}}?
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal">Cancelar
+                </button>
+                <button
+                  class="btn btn-primary"
+                  @click="saveReservation()"
+                  data-dismiss="modal"
+                  type="submit">
+                  Salvar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
       </div>
       <br>
     </div>

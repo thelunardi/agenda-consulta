@@ -81,7 +81,13 @@ export default {
      *
      */
     saveReservation () {
-      if (this.day === '' || this.period === '') {
+      if (this.day === '') {
+        alert('Selecione uma data.')
+        return
+      }
+      if (this.period === '') {
+        alert('Selecione um período.')
+        this.$refs.period.focus()
         return
       }
       httpReservation.post('reservation', {

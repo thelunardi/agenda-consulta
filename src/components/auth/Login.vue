@@ -8,6 +8,7 @@
           id="email"
           type="email"
           name="email"
+          ref="email"
           v-model="email"
         >
       </div>
@@ -19,6 +20,7 @@
           :type="type"
           id="phone"
           name="phone"
+          ref="phone"
           v-model="phone"
         >
         <div class="input-group-append">
@@ -29,7 +31,7 @@
       </div>
       <div>
         <button
-          class="btn waves-effect"
+          class="btn btn-primary"
           @click="logar()"
           type="submit">
           Entrar
@@ -57,7 +59,12 @@ export default {
      *
      */
     logar () {
-      if (this.email === '' || this.phone === '') {
+      if (this.email === '') {
+        this.$refs.email.focus()
+        return
+      }
+      if (this.phone === '') {
+        this.$refs.phone.focus()
         return
       }
       httpUsers.get('/users', {

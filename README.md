@@ -1,21 +1,20 @@
-# agenda-consulta
+# Sistema para Agendamento de Consultas
 
 > A Vue.js project
 
 ## Build Setup
 
 ``` bash
-# install dependencies
-npm install
+# instale o docker
+sudo apt install docker.io
 
-# serve with hot reload at localhost:8080
-npm run dev
+# instale o docker-compose
+sudo curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
 
-# build for production with minification
-npm run build
+# execute comando de build do docker para criar a imagem 
+docker build -t agenda-consulta .
 
-# build for production and view the bundle analyzer report
-npm run build --report
+# execute o comando docker-compose up para construir a aplicação
+docker-compose up
 ```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
